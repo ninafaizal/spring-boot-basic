@@ -17,7 +17,9 @@ import com.bank.model.ProductDTO;
 import com.bank.service.IProductService;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/products")

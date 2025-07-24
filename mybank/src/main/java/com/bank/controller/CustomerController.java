@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,7 @@ import com.bank.service.ICustomerService;
 
 import lombok.AllArgsConstructor;
 
+@Slf4j
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/customers/v1")
