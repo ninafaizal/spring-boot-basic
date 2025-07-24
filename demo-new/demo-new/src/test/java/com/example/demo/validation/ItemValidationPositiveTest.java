@@ -1,5 +1,5 @@
 // src/test/java/com/example/demo/validation/ItemValidationSimpleTest.java
-package com.example.demo_new.validation;
+package com.example.demo.validation;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

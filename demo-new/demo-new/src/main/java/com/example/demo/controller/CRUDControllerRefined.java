@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
-import java.util.List;
+import java.util.*;
+import lombok.*;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,17 +20,20 @@ import com.example.demo.service.ItemServiceAnalysis;
 import com.example.demo.util.ResponseEntityUtil;
 import com.example.demo.validation.ItemValidation;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping("/demo/v2")
 public class CRUDControllerRefined {
 
 	private final ItemService itemService;
 	private final ItemServiceAnalysis itemServiceAnalysis;
+	
+	private static final String ID_ITEM = "Item with ID ";
 
-	public CRUDControllerRefined(ItemService itemService, ItemServiceAnalysis itemServiceAnalysis) {
-	    this.itemService = itemService;
-	    this.itemServiceAnalysis = itemServiceAnalysis;
-	}
+//	public CRUDControllerRefined(ItemService itemService, ItemServiceAnalysis itemServiceAnalysis) {
+//	    this.itemService = itemService;
+//	    this.itemServiceAnalysis = itemServiceAnalysis;
+//	}
 
     // --- CREATE (Auto-generated ID) ---
     @PostMapping
@@ -58,7 +62,7 @@ public class CRUDControllerRefined {
     	
         return itemService.getItemById(Long.valueOf(id))
                 .map(item -> ResponseEntityUtil.buildResponse("Found item with ID: " + item.id() + " and data: " + item.value(), HttpStatus.OK))
-                .orElseGet(() -> ResponseEntityUtil.buildResponse("Item with ID: " + id + " not found.", HttpStatus.NOT_FOUND));
+                .orElseGet(() -> ResponseEntityUtil.buildResponse(CRUDControllerRefined.ID_ITEM + id + " not found.", HttpStatus.NOT_FOUND));
     }
 
     // --- UPDATE ---

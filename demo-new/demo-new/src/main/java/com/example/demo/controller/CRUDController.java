@@ -1,8 +1,6 @@
 package com.example.demo.controller;
 
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +38,7 @@ import com.example.demo.model.Data;
 public class CRUDController {
 
 	//private final Map<Long, String> dataStore = new ConcurrentHashMap<>();
-	private final AtomicLong idCounter = new AtomicLong();
+	//private final AtomicLong idCounter = new AtomicLong();
 
 	// --- CREATE (HTTP POST) ---
 	@PostMapping
@@ -50,7 +48,7 @@ public class CRUDController {
 																										// Request if
 																										// name is empty
 		}
-		long newId = idCounter.incrementAndGet();
+		long newId = Data.getIdCounter().incrementAndGet();
 		Data.getDataStore().put(newId, newItemName);
 		// Returning the ID and the data for confirmation
 		return new ResponseEntity<>("Item created successfully with ID: " + newId + " and data: " + newItemName,
