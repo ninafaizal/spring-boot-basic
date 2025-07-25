@@ -3,7 +3,6 @@ package com.bank.repo;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 import com.bank.entity.AccountEntity;
 import com.bank.entity.CustomerEntity;
+import com.bank.entity.ProductEntity;
 
 //@SpringBootTest
 //@ActiveProfiles("test") // Uses application-test.properties for H2 setup
@@ -28,6 +28,12 @@ class CustomerFetchEagerLoadTest {
     @Autowired
     private ICustomerRepo customerRepo;
     
+    @Autowired 
+    private IProductRepo productRepo;
+    
+    @Autowired
+    private IAccountRepo accountRepo;
+    
 	//@Test
     void testSaveCustomerWithAccount() {
         // Step 1: Create Customer
@@ -38,6 +44,16 @@ class CustomerFetchEagerLoadTest {
         customer.setDescription("Test customer with account");
         customer.setCreationDate(LocalDateTime.now());
 
+        // Step 4: Save customer (cascades account save)
+        CustomerEntity savedCustomer = customerRepo.save(customer);
+        assertNotNull(savedCustomer);
+        CustomerEntity found = customerRepo.findById(savedCustomer.getCustomerID()).get();
+        
+        ProductEntity productEntity = new ProductEntity();
+        productEntity.setProductName("name");
+        productEntity.setProductID(1l);
+        productRepo.save(productEntity);
+        
         // Step 2: Create Account and associate with Customer
         AccountEntity account = new AccountEntity();
         account.setAccountNumber("ACC00112233");
@@ -45,14 +61,14 @@ class CustomerFetchEagerLoadTest {
         account.setCreationDate(LocalDateTime.now());
         account.setCustomerEntity(customer);
 
-        // Step 3: Add account to customer
-        customer.setAccountEntities(List.of(account));
-
-        // Step 4: Save customer (cascades account save)
-        CustomerEntity savedCustomer = customerRepo.save(customer);
-        assertNotNull(savedCustomer);
+        account.setProductEntity(productEntity);
+        account.setCustomerEntity(found);
         
-        CustomerEntity found = customerRepo.findById(savedCustomer.getCustomerID()).get();
+        // Step 3: Add account to customer
+        
+        accountRepo.save(account);
+        
+        found = customerRepo.findById(savedCustomer.getCustomerID()).get();
         assertNotNull(found);
         assertNotNull(found.getAccountEntities().get(0)); // expected error here
     }

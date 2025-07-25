@@ -9,8 +9,6 @@ import org.springframework.boot.actuate.metrics.MetricsEndpoint.MetricNamesDescr
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import lombok.extern.slf4j.Slf4j;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -18,7 +16,6 @@ import java.util.Map;
 // basic actuator 
 // http://localhost:8080/actuator
 
-@Slf4j
 @RestController
 @RequestMapping("/api/actuator/v1")
 public class ActuatorSummaryController {

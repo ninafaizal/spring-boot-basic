@@ -1,7 +1,6 @@
 package com.bank.service;
 
 import com.bank.entity.ProductEntity;
-
 import java.util.List;
 
 public interface IProductService {

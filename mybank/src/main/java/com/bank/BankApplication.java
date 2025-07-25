@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication(scanBasePackages = {
 		"com.bank",
+		"com.demo.exceptions",
 		"com.demo.util.config"
 	})
 public class BankApplication {

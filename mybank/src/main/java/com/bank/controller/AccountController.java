@@ -18,9 +18,7 @@ import com.bank.model.AccountDTO;
 import com.bank.service.IAccountService;
 
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/accounts/v1")

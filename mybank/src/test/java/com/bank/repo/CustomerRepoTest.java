@@ -18,7 +18,7 @@ import com.bank.entity.CustomerEntity;
 @SpringBootTest
 @ActiveProfiles("test") // Uses application-test.properties for H2 setup
 
-class CustomerRepoTest {
+public class CustomerRepoTest {
 
     @Autowired
     private ICustomerRepo customerRepo;
